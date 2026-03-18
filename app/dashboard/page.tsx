@@ -1,38 +1,18 @@
-import { eq } from "drizzle-orm";
-import { redirect } from "next/navigation";
+import { Metadata } from "next";
 
-import Client from "@/app/dashboard/client";
-import { getAuthSession } from "@/lib/auth/session";
-import { db } from "@/lib/db/client";
-import { users } from "@/lib/db/schema";
+export const metadata: Metadata = {
+  title: "Dashboard | LeadFlow",
+  description: "Welcome to your LeadFlow CRM dashboard.",
+};
 
-// Purpose: Server route entry for /dashboard.
-// Keep auth checks and database reads in this file,
-// then pass prepared props into `client.tsx`.
-
-function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
-}
-
-export default async function DashboardPage() {
-  const session = await getAuthSession();
-  if (!session) redirect("/auth#signin");
-
-  const [user] = await db
-    .select({ firstName: users.firstName })
-    .from(users)
-    .where(eq(users.id, session.userId))
-    .limit(1);
-
-  const firstName = user?.firstName || "there";
-
+export default function DashboardPage() {
   return (
-    <Client
-      greeting={getGreeting()}
-      firstName={firstName}
-    />
+    <section>
+      <h1 className="text-3xl mb-4 font-bold">LeadFlow Dashboard Overview</h1>
+      <p className="text-muted-foreground mb-6">
+        Welcome to LeadFlow! Use the sidebar to access your CRM — manage leads, contacts, companies, and pipeline stages easily.
+      </p>
+      {/* Add onboard cards, demo metrics, and quick links here */}
+    </section>
   );
 }
