@@ -1,49 +1,40 @@
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardDescription,
+  CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getHomeContent } from "@/content/home";
+import { homeContent } from "@/content/home";
 
-const { services } = getHomeContent();
+const { services } = homeContent;
 
-export const LayoutServicesSection = () => {
+export default function LayoutServicesSection() {
   return (
-    <section id="services" className="container py-24 sm:py-32">
-      <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-        {services.eyebrow}
-      </h2>
-
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        {services.heading}
-      </h2>
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">
-        {services.subtitle}
-      </h3>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 w-full lg:w-[60%] mx-auto">
-        {services.items.map(({ title, description, pro }) => (
-          <Card
-            key={title}
-            className="bg-muted/60 dark:bg-card h-full relative"
-          >
-            <CardHeader>
-              <CardTitle>{title}</CardTitle>
-              <CardDescription>{description}</CardDescription>
-            </CardHeader>
-            <Badge
-              data-pro={pro}
-              variant="secondary"
-              className="absolute -top-2 -right-3 data-[pro=false]:hidden"
-            >
-              PRO
-            </Badge>
-          </Card>
-        ))}
+    <section id="layout-services" className="py-16">
+      <div className="container max-w-screen-xl mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Everything Your Team Needs
+        </h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {services.map((group, idx) => (
+            <Card key={idx} className="h-full shadow-none border-gray-200">
+              <CardHeader>
+                <CardTitle>{group.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {group.items.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}
