@@ -1,15 +1,15 @@
 // Server Component: keep layout/content server-rendered; sections are data-driven.
-import { LayoutBenefitsSection } from "../components/home/LayoutBenefitsSection";
-import { LayoutContactSection } from "../components/home/LayoutContactSection";
-import { LayoutFaqSection } from "../components/home/LayoutFaqSection";
-import { LayoutFeatureGridSection } from "../components/home/LayoutFeatureGridSection";
-import { LayoutFooterSection } from "../components/home/LayoutFooterSection";
-import { LayoutHeroSection } from "../components/home/LayoutHeroSection";
-import { LayoutPricingSection } from "../components/home/LayoutPricingSection";
-import { LayoutServicesSection } from "../components/home/LayoutServicesSection";
-import { LayoutSponsorsSection } from "../components/home/LayoutSponsorsSection";
-import { LayoutTeamSection } from "../components/home/LayoutTeamSection";
-import { LayoutTestimonialSection } from "../components/home/LayoutTestimonialSection";
+import LayoutBenefitsSection from "../components/home/LayoutBenefitsSection";
+import LayoutContactSection from "../components/home/LayoutContactSection";
+import LayoutFaqSection from "../components/home/LayoutFaqSection";
+import LayoutFeatureGridSection from "../components/home/LayoutFeatureGridSection";
+import LayoutFooterSection from "../components/home/LayoutFooterSection";
+import LayoutHeroSection from "../components/home/LayoutHeroSection";
+import LayoutPricingSection from "../components/home/LayoutPricingSection";
+import LayoutServicesSection from "../components/home/LayoutServicesSection";
+import LayoutSponsorsSection from "../components/home/LayoutSponsorsSection";
+import LayoutTeamSection from "../components/home/LayoutTeamSection";
+import LayoutTestimonialSection from "../components/home/LayoutTestimonialSection";
 import { Navbar as LayoutNavbar } from "@/components/layout/navbar";
 import { getAuthSession } from "@/lib/auth/session";
 
