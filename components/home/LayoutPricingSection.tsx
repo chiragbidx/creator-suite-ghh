@@ -1,79 +1,46 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import { getHomeContent } from "@/content/home";
+import { homeContent } from "@/content/home";
 
-const { pricing } = getHomeContent();
+const { pricing } = homeContent;
 
-export const LayoutPricingSection = () => {
+export default function LayoutPricingSection() {
   return (
-    <section id="pricing" className="container py-24 sm:py-32">
-      <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-        {pricing.eyebrow}
-      </h2>
-
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        {pricing.heading}
-      </h2>
-
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground pb-14">
-        {pricing.subtitle}
-      </h3>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
-        {pricing.plans.map(
-          ({ title, popular, price, description, buttonText, benefits }) => (
+    <section id="layout-pricing" className="py-16 bg-muted/50">
+      <div className="container max-w-screen-md mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          {pricing.heading}
+        </h2>
+        <div className="flex flex-col md:flex-row gap-8 justify-center">
+          {pricing.plans.map((plan, idx) => (
             <Card
-              key={title}
-              className={
-                popular
-                  ? "drop-shadow-xl shadow-black/10 dark:shadow-white/10 border-[1.5px] border-primary lg:scale-[1.1]"
-                  : ""
-              }
+              key={plan.name}
+              className="flex-1 min-w-[240px] max-w-[350px] mx-auto"
             >
               <CardHeader>
-                <CardTitle className="pb-2">{title}</CardTitle>
-
-                <CardDescription className="pb-4">
-                  {description}
-                </CardDescription>
-
-                <div>
-                  <span className="text-3xl font-bold">${price}</span>
-                  <span className="text-muted-foreground"> {pricing.priceSuffix}</span>
-                </div>
+                <CardTitle>{plan.name}</CardTitle>
               </CardHeader>
-
-              <CardContent className="flex">
-                <div className="space-y-4">
-                  {benefits.map((benefit) => (
-                    <span key={benefit} className="flex">
-                      <Check className="text-primary mr-2" />
-                      <h3>{benefit}</h3>
-                    </span>
+              <CardContent>
+                <div className="text-3xl font-bold mb-2">{plan.price}</div>
+                <ul className="space-y-1 mb-4">
+                  {plan.features.map((f, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <Check className="text-primary w-4 h-4" />
+                      <span>{f}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
+                {/* Add CTA or badge here if needed */}
               </CardContent>
-
-              <CardFooter>
-                <Button
-                  variant={popular ? "default" : "secondary"}
-                  className="w-full"
-                >
-                  {buttonText}
-                </Button>
-              </CardFooter>
             </Card>
-          )
-        )}
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}
