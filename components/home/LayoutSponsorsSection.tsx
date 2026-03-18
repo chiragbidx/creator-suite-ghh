@@ -1,27 +1,23 @@
-"use client";
-
 import { Icon } from "@/components/ui/icon";
-import { getHomeContent } from "@/content/home";
+import { homeContent } from "@/content/home";
 
-const { sponsors } = getHomeContent();
+const { sponsors } = homeContent;
 
-export const LayoutSponsorsSection = () => {
+export default function LayoutSponsorsSection() {
+  if (!sponsors) return null;
   return (
-    <section id="sponsors" className="max-w-[75%] mx-auto pb-24 sm:pb-32">
-      <h2 className="text-lg md:text-xl text-center mb-6">
-        {sponsors.heading}
-      </h2>
-
-      <div className="relative overflow-hidden rounded-xl border border-border/60 bg-card/60 p-4">
-        <div className="flex w-max gap-12 animate-marquee">
-          {sponsors.items.flatMap((item) => [item, item]).map(({ icon, name }, idx) => (
-            <div key={`${name}-${idx}`} className="flex items-center text-xl md:text-2xl font-medium text-foreground/85">
-              <Icon name={icon} size={32} className="mr-2 text-primary" />
-              {name}
+    <section id="layout-sponsors" className="py-10 bg-background">
+      <div className="container max-w-screen-xl mx-auto px-4 flex flex-col items-center">
+        <h2 className="text-xl font-semibold mb-4">Powered by</h2>
+        <div className="flex gap-8 items-center">
+          {sponsors.map((s, i) => (
+            <div key={i} title={s.label} className="flex items-center gap-2">
+              <Icon name={s.iconName} size={32} />
+              <span className="text-muted-foreground text-sm">{s.label}</span>
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-};
+}
